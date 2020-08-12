@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePasswordResetTabel extends Migration
+class CreateMataKuliahTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreatePasswordResetTabel extends Migration
      */
     public function up()
     {
-        Schema::create('password_reset_tabel', function (Blueprint $table) {
-            $table->id();
+        Schema::create('mata_kuliah', function (Blueprint $table) {
+            $table->string('kode_matakuliah', 6)->primary();
+            $table->string('nama_matakuliah', 150);
+            $table->integer('sks');
+            $table->integer('semester');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreatePasswordResetTabel extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_reset_tabel');
+        Schema::dropIfExists('mata_kuliah');
     }
 }
