@@ -29,8 +29,9 @@ class MahasiswaController extends Controller
         return Datatables::of($mhs)
             ->addIndexColumn()
             ->addColumn('action', function ($mhs) {
-                $action = '<a class="text-primary" href="/mhs/edit/'.$mhs->nim.'">Edit</a>';
-                $action .= ' | <a class="text-danger" href="/mhs/delete/'.$mhs->nim.'">Hapus</a>';
+                $action = '<a class="btn btn-xs btn-primary" href="/mhs/edit/'.$mhs->nim.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            
+                $action .= ' <a class="btn btn-xs btn-danger" href="/mhs/delete/'.$mhs->nim.'">Hapus</a>';
                 return $action;
             })
             ->make();
@@ -81,7 +82,7 @@ class MahasiswaController extends Controller
      * @param  \App\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit(Mahasiswa $mahasiswa, $id)
     {
         $prodi = Prodi::all();
         $mhs = Mahasiswa::find($id);

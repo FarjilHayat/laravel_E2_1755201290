@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Matkul;
+use App\matakuliah;
 use Illuminate\Http\Request;
 
-class MatkulController extends Controller
+class mkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class MatkulController extends Controller
      */
     public function index()
     {
-        //
+        $mk = matakuliah::all();
+        return view('matakuliah.index',compact('mk'));
     }
 
     /**
@@ -24,7 +25,7 @@ class MatkulController extends Controller
      */
     public function create()
     {
-        //
+        return view('matakuliah.create');
     }
 
     /**
@@ -35,51 +36,62 @@ class MatkulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $request->validate(['kode_mk'=>'required|digits:5','nama_mk'=>'required']);
+        matakuliah::create($request->all());
+        return redirect()->route('matakuliah.index')->with('success','data berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Matkul  $matkul
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Matkul $matkul)
+    public function show(matakuliah $matakuliah)
     {
-        //
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Matkul  $matkul
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Matkul $matkul)
+    public function edit($id)
     {
-        //
+        $mk=matakuliah::find($id);
+        return view('matakuliah.edit',compact('mk'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Matkul  $matkul
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Matkul $matkul)
+    public function update(Request $request, $id)
     {
-        //
+        $mk=matakuliah::find($id);
+        $mk->kode_mk= $request->input('kode_mk');
+        $mk->nama_mk= $request->input('nama_mk');
+        $mk->sks= $request->input('sks');
+        $mk->semester= $request->input('semester');
+        $mk->save();
+        return redirect('/');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Matkul  $matkul
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Matkul $matkul)
+    public function destroy($id)
     {
-        //
+        $mk=matakuliah::find($id);
+        $mk->delete();
+        return redirect('/');
     }
 }

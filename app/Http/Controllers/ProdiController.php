@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Prodi;
+use DataTables;
 use Illuminate\Http\Request;
 
 class ProdiController extends Controller
@@ -14,7 +15,8 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        //
+       $prd = prodi::all();
+       return view('prodi.index', compact('prd'));
     }
 
     /**
@@ -22,9 +24,16 @@ class ProdiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function prodi_list()
     {
-        //
+        
+        $prd = prodi::all();
+
+        return Datatables::of(prodi::all())->make(true);
+
+
+
+            
     }
 
     /**

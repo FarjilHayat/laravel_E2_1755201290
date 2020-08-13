@@ -16,10 +16,10 @@
         <div class="container-fluid">
                 
                 <div class="row mt-2">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                     @include ('layout.sidebar')
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @include ('layout.breadcrumb')
                         @yield ('content')   
                     </div>
